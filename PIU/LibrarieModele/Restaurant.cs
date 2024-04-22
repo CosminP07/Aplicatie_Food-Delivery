@@ -22,6 +22,7 @@ namespace LibrarieModele
         private const int SPECIFIC = 3;
 
         public Specific specific { get; set; }
+        public int clientitinta { get; set; }
         public Restaurant()
         {
             denumire = string.Empty;
