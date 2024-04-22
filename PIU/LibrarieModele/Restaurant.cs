@@ -9,6 +9,7 @@ using LibrarieModele.Enumerari;
 
 namespace LibrarieModele
 {
+
     public class Restaurant
     {
         public string denumire { get; set; }
@@ -20,9 +21,12 @@ namespace LibrarieModele
         private const int DEN = 1;
         private const int AN = 2;
         private const int SPECIFIC = 3;
+        private const int CT = 4;
 
         public Specific specific { get; set; }
         public int clientitinta { get; set; }
+
+        public ClientiTinta[] clientiTintas { get; set; }
         public Restaurant()
         {
             denumire = string.Empty;
@@ -53,6 +57,7 @@ namespace LibrarieModele
             this.denumire = dateFisier[DEN];
             this.an_fondator = Convert.ToInt32(dateFisier[AN]);
             this.specific = (Specific)Enum.Parse(typeof(Specific), dateFisier[SPECIFIC]);
+
         }
         public string ConversieLaSir_PentruFisier()
         {
@@ -62,7 +67,25 @@ namespace LibrarieModele
                 (denumire ?? " NECUNOSCUT "),
                 (an_fondator.ToString() ?? " NECUNOSCUT "),
                 specific);
-
+            /*int rezultat = clientitinta & 0x0001;
+            if (rezultat != 0) 
+                {
+                obiectRestaurantPentruFisier = string.Join(";","Elev");
+                }
+            rezultat = clientitinta & 0x0010;
+            if (rezultat != 0)
+            {
+                obiectRestaurantPentruFisier = string.Join(";", "Student");
+            }
+            rezultat = clientitinta & 0x0100;
+            if (rezultat != 0)
+                obiectRestaurantPentruFisier = string.Join(";", "Angajat");
+            rezultat = clientitinta & 0x1000;
+            if (rezultat != 0)
+                obiectRestaurantPentruFisier = string.Join(";", "Somer");
+            rezultat = clientitinta & 0x00010000;
+            if (rezultat != 0)
+                obiectRestaurantPentruFisier = string.Join(";", "Pensionar");*/
             return obiectRestaurantPentruFisier;
         }
         public string Info()

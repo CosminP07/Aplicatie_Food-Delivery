@@ -209,7 +209,7 @@ namespace Aplicatie_Food_Delivery
             "5 - Elegant \n");
             int optiune = Convert.ToInt32(Console.ReadLine());
             restaurant.specific = (Specific)optiune;
-            Console.WriteLine("Alegeti un public tinta: ");
+            /*Console.WriteLine("Alegeti un public tinta: ");
             Console.WriteLine("1 - Elev\n 2 - Student\n 3 - Angajat\n 4 - Somer\n 5 - Pensionar");
             int selectat = 0;
             int optiune1 = Convert.ToInt32(Console.ReadLine());
@@ -217,26 +217,26 @@ namespace Aplicatie_Food_Delivery
                 switch (optiune1)
                 {
                     case 1:
-                        selectat |= (int)ClientiTinta.Elev; 
+                        selectat |= 0x0001; 
                         break;
                     case 2:
-                        selectat |= (int)ClientiTinta.Student;
+                        selectat |= 0x0010;
                         break;
                     case 3:
-                        selectat |= (int)ClientiTinta.Angajat;
+                        selectat |= 0x0100;
                         break;
                     case 4:
-                        selectat |= (int)ClientiTinta.Somer;
+                        selectat |= 0x1000;
                         break;
                     case 5:
-                        selectat |= (int)ClientiTinta.Pensionar;
+                        selectat |= 0x00010000;
                         break;
                     default:
                         Console.WriteLine("Optiune invalida!");
                         break;
                 }
             }
-            restaurant.clientitinta = selectat;
+            restaurant.clientitinta = selectat;*/
             return restaurant;
         }
         public static Client CitireClientTastatura()
