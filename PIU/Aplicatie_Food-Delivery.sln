@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarieModele", "LibrarieM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NivelStocareDate", "NivelStocareDate\NivelStocareDate.csproj", "{B81624D0-65B5-4DD4-9C30-86787516F2F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplicatie_Food-Delivery_UI_WindowsForms", "Aplicatie_Food-Delivery_UI_WindowsForms\Aplicatie_Food-Delivery_UI_WindowsForms.csproj", "{8FEA9ACF-37D6-4EFD-9A31-4D7FFBC75FF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B81624D0-65B5-4DD4-9C30-86787516F2F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B81624D0-65B5-4DD4-9C30-86787516F2F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B81624D0-65B5-4DD4-9C30-86787516F2F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FEA9ACF-37D6-4EFD-9A31-4D7FFBC75FF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FEA9ACF-37D6-4EFD-9A31-4D7FFBC75FF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FEA9ACF-37D6-4EFD-9A31-4D7FFBC75FF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FEA9ACF-37D6-4EFD-9A31-4D7FFBC75FF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

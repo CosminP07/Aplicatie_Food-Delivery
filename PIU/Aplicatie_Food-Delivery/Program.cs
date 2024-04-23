@@ -22,12 +22,20 @@ namespace Aplicatie_Food_Delivery
             //AdministrareClienti_Memorie adminClienti = new AdministrareClienti_Memorie();
             Client clientNou = new Client();
             string numeFisier = ConfigurationManager.AppSettings["NumeFisier"];
-            AdministrareClienti_Fisier adminClientif = new AdministrareClienti_Fisier(numeFisier);
+            string locatieFisierSolutie = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            // setare locatie fisier in directorul corespunzator solutiei
+            // astfel incat datele din fisier sa poata fi utilizate si de alte proiecte
+            string caleCompletaFisier = locatieFisierSolutie + "\\" + numeFisier;
+            AdministrareClienti_Fisier adminClientif = new AdministrareClienti_Fisier(caleCompletaFisier);
             int nrClienti1 = 0;
             
             Restaurant restaurantNou = new Restaurant();
             string numeFisierR = ConfigurationManager.AppSettings["NumeFisierR"];
-            AdministrareRestaurante_Fisier adminRestaurante = new AdministrareRestaurante_Fisier(numeFisierR);
+            string locatieFisierSolutie1 = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            // setare locatie fisier in directorul corespunzator solutiei
+            // astfel incat datele din fisier sa poata fi utilizate si de alte proiecte
+            string caleCompletaFisier1 = locatieFisierSolutie1 + "\\" + numeFisierR;
+            AdministrareRestaurante_Fisier adminRestaurante = new AdministrareRestaurante_Fisier(caleCompletaFisier1);
             int nrRestaurante1 = 0;
             string optiune;
             do

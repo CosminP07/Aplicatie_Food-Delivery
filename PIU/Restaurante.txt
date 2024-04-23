@@ -1,0 +1,2 @@
+1;KFC;1950;FastFood
+2;Zimbru;2000;Traditional
