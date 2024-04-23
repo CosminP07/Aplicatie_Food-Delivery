@@ -1,4 +1,5 @@
 ﻿using LibrarieModele;
+using LibrarieModele.Enumerari;
 using NivelStocareDate;
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,19 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
         private Label lblAn;
         private Label lblSpecific;
 
+        private Label lblAdaugaDenumire;
+        private Label lblAdaugaAn;
+        private Label lblAdaugaSpecific;
+
         private Label[] lblsDenumire;
         private Label[] lblsAn;
         private Label[] lblsSpecific;
+
+        private Button btnAdauga;
+
+        private TextBox txtDenumire;
+        private TextBox txtAn;
+        private TextBox txtSpecific;
 
         private const int LATIME_CONTROL = 100;
         private const int DIMENSIUNE_PAS_Y = 30;
@@ -74,7 +85,114 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
             lblSpecific.Left = 3 * DIMENSIUNE_PAS_X;
             lblSpecific.ForeColor = Color.Yellow;
             this.Controls.Add(lblSpecific);
+
+            lblAdaugaDenumire = new Label();
+            lblAdaugaDenumire.Width = LATIME_CONTROL * 2;
+            lblAdaugaDenumire.Text = "Denumire:";
+            lblAdaugaDenumire.Left = 4 * DIMENSIUNE_PAS_X;
+            lblAdaugaDenumire.ForeColor = Color.DarkSeaGreen;
+            this.Controls.Add(lblAdaugaDenumire);
+
+            txtDenumire = new TextBox();
+            txtDenumire.Width = LATIME_CONTROL * 2;
+            txtDenumire.Left = 4 * DIMENSIUNE_PAS_X;
+            txtDenumire.Top = DIMENSIUNE_PAS_Y;
+            this.Controls.Add(txtDenumire);
+
+            lblAdaugaAn = new Label();
+            lblAdaugaAn.Width = LATIME_CONTROL;
+            lblAdaugaAn.Text = "An fondator:";
+            lblAdaugaAn.Left = 4 * DIMENSIUNE_PAS_X;
+            lblAdaugaAn.Top = 2 * DIMENSIUNE_PAS_Y;
+            lblAdaugaAn.ForeColor = Color.DarkSeaGreen;
+            this.Controls.Add(lblAdaugaAn);
+
+            txtAn = new TextBox();
+            txtAn.Width = LATIME_CONTROL;
+            txtAn.Left = 4 * DIMENSIUNE_PAS_X;
+            txtAn.Top = 3 * DIMENSIUNE_PAS_Y;
+            this.Controls.Add(txtAn);
+
+            lblAdaugaSpecific = new Label();
+            lblAdaugaSpecific.Width = LATIME_CONTROL;
+            lblAdaugaSpecific.Text = "Specific:";
+            lblAdaugaSpecific.Left = 4 * DIMENSIUNE_PAS_X;
+            lblAdaugaSpecific.Top = 4 * DIMENSIUNE_PAS_Y;
+            lblAdaugaSpecific.ForeColor = Color.DarkSeaGreen;
+            this.Controls.Add(lblAdaugaSpecific);
+
+            txtSpecific = new TextBox();
+            txtSpecific.Width = LATIME_CONTROL;
+            txtSpecific.Left = 4 * DIMENSIUNE_PAS_X;
+            txtSpecific.Top = 5 * DIMENSIUNE_PAS_Y;
+            this.Controls.Add(txtSpecific);
+
+            btnAdauga = new Button();
+            btnAdauga.Width = LATIME_CONTROL;
+            btnAdauga.Location = new System.Drawing.Point(4 * DIMENSIUNE_PAS_X, 6 * DIMENSIUNE_PAS_Y);
+            btnAdauga.Text = "Adauga";
+            // "Click" este un *event* in clasa Button
+            // si poate avea atasat unul sau mai multe handlere de eveniment (adrese de functii)
+            // Acesta este motivul utilizarii operatorului +=
+            btnAdauga.Click += OnButtonClicked1;
+            this.Controls.Add(btnAdauga);
+
+            this.FormClosed += OnFormClosed;
         }
+
+        private void OnButtonClicked1(object sender, EventArgs e)
+        {
+            // obiectul *sender* este butonul btnCalculeaza
+            // *e* reprezinta o lista de valori care se transmit la invocarea evenimentului Click al clasei Button
+            // catre subscriber-ul curent care este forma FormularGeometrie 
+            int valid = 0;
+            if (string.IsNullOrWhiteSpace(txtAn.Text))
+            {
+                lblAdaugaAn.ForeColor = Color.Red;
+                this.Controls.Add(lblAdaugaAn);
+                valid = 1;
+            }
+            else if (Convert.ToInt32(txtAn.Text) < 1800 || Convert.ToInt32(txtAn.Text) > 2024)
+            {
+                lblAdaugaAn.ForeColor = Color.Red;
+                this.Controls.Add(lblAdaugaAn);
+                valid = 1;
+            }
+            if (string.IsNullOrWhiteSpace(txtSpecific.Text))
+            {
+                lblAdaugaSpecific.ForeColor = Color.Red;
+                this.Controls.Add(lblAdaugaSpecific);
+                valid = 1;
+            }
+            else if (txtSpecific.Text.ToUpper() != "FASTFOOD" && txtSpecific.Text.ToUpper() != "TRADITIONAL" && txtSpecific.Text.ToUpper() != "CHINEZESC" && txtSpecific.Text.ToUpper() != "INDIAN" && txtSpecific.Text.ToUpper() != "ELEGANT")
+            {
+                lblAdaugaSpecific.ForeColor = Color.Red;
+                this.Controls.Add(lblAdaugaSpecific);
+                valid = 1;
+            }
+            if (string.IsNullOrWhiteSpace(txtDenumire.Text))
+            {
+                lblAdaugaDenumire.ForeColor = Color.Red;
+                this.Controls.Add(lblAdaugaDenumire);
+                valid = 1;
+            }
+
+
+            if (valid == 0)
+            {
+                lblAdaugaDenumire.ForeColor = Color.Blue;
+                this.Controls.Add(lblAdaugaDenumire);
+                lblAdaugaSpecific.ForeColor = Color.Blue;
+                this.Controls.Add(lblAdaugaSpecific);
+                lblAdaugaAn.ForeColor = Color.Blue;
+                this.Controls.Add(lblAdaugaAn);
+                Restaurant restaurant = new Restaurant(adminRestaurante.GetLastId(), txtDenumire.Text, Convert.ToInt32(txtAn.Text));
+                restaurant.specific = (Specific)Enum.Parse(typeof(Specific), txtSpecific.Text);
+                adminRestaurante.AddRestaurant(restaurant);
+                AfiseazaRestaurante();
+            }
+        }
+
         private void Form2_Load(object sender, EventArgs e)
         {
             AfiseazaRestaurante();
@@ -116,6 +234,10 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
                 this.Controls.Add(lblsSpecific[i]);
                 i++;
             }
+        }
+        private void OnFormClosed(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

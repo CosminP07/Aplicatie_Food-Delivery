@@ -31,6 +31,12 @@ namespace LibrarieModele
             this.nume_prenume = nume_prenume;
             this.varsta = varsta;
         }
+        public Client(int id, string nume_prenume, int varsta)
+        {
+            this.nume_prenume = nume_prenume;
+            this.varsta = varsta;
+            Id_Client = id;
+        }
 
         public Client(string linieFisier)
         {

@@ -38,6 +38,12 @@ namespace LibrarieModele
             this.denumire = denumire;
             this.an_fondator = an_fondator;
         }
+        public Restaurant(int id, string denumire, int an_fondator)
+        {
+            this.denumire = denumire;
+            this.an_fondator = an_fondator;
+            Id_Restaurant = id;
+        }
         public string Vechi_Nou()
         {
             if (an_fondator == 0)
