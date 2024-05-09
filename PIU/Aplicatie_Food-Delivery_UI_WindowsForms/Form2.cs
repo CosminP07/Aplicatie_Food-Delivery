@@ -54,8 +54,8 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
             Restaurant[] restaurante = adminRestaurante.GetRestaurante(out nrRestaurante);
 
             //setare proprietati
-            this.Size = new Size(500, 200);
-            this.StartPosition = FormStartPosition.Manual;
+            this.Size = new Size(1000, 400);
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.Location = new Point(440, 290);
             this.Font = new Font("Calibri", 12, FontStyle.Bold);
             this.ForeColor = Color.Cyan;
@@ -142,55 +142,7 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
 
         private void OnButtonClicked1(object sender, EventArgs e)
         {
-            // obiectul *sender* este butonul btnCalculeaza
-            // *e* reprezinta o lista de valori care se transmit la invocarea evenimentului Click al clasei Button
-            // catre subscriber-ul curent care este forma FormularGeometrie 
-            int valid = 0;
-            if (string.IsNullOrWhiteSpace(txtAn.Text))
-            {
-                lblAdaugaAn.ForeColor = Color.Red;
-                this.Controls.Add(lblAdaugaAn);
-                valid = 1;
-            }
-            else if (Convert.ToInt32(txtAn.Text) < 1800 || Convert.ToInt32(txtAn.Text) > 2024)
-            {
-                lblAdaugaAn.ForeColor = Color.Red;
-                this.Controls.Add(lblAdaugaAn);
-                valid = 1;
-            }
-            if (string.IsNullOrWhiteSpace(txtSpecific.Text))
-            {
-                lblAdaugaSpecific.ForeColor = Color.Red;
-                this.Controls.Add(lblAdaugaSpecific);
-                valid = 1;
-            }
-            else if (txtSpecific.Text.ToUpper() != "FASTFOOD" && txtSpecific.Text.ToUpper() != "TRADITIONAL" && txtSpecific.Text.ToUpper() != "CHINEZESC" && txtSpecific.Text.ToUpper() != "INDIAN" && txtSpecific.Text.ToUpper() != "ELEGANT")
-            {
-                lblAdaugaSpecific.ForeColor = Color.Red;
-                this.Controls.Add(lblAdaugaSpecific);
-                valid = 1;
-            }
-            if (string.IsNullOrWhiteSpace(txtDenumire.Text))
-            {
-                lblAdaugaDenumire.ForeColor = Color.Red;
-                this.Controls.Add(lblAdaugaDenumire);
-                valid = 1;
-            }
 
-
-            if (valid == 0)
-            {
-                lblAdaugaDenumire.ForeColor = Color.Blue;
-                this.Controls.Add(lblAdaugaDenumire);
-                lblAdaugaSpecific.ForeColor = Color.Blue;
-                this.Controls.Add(lblAdaugaSpecific);
-                lblAdaugaAn.ForeColor = Color.Blue;
-                this.Controls.Add(lblAdaugaAn);
-                Restaurant restaurant = new Restaurant(adminRestaurante.GetLastId(), txtDenumire.Text, Convert.ToInt32(txtAn.Text));
-                restaurant.specific = (Specific)Enum.Parse(typeof(Specific), txtSpecific.Text);
-                adminRestaurante.AddRestaurant(restaurant);
-                AfiseazaRestaurante();
-            }
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -238,6 +190,39 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
         private void OnFormClosed(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void OnCautaCClicked(object sender, EventArgs e)
+        {
+            if (txtCautare11.Text != "")
+            {
+
+                int valid = 0;
+                Restaurant[] restaurante = adminRestaurante.GetRestaurante(out int nrRestaurante);
+                for (int contor = 0; contor < nrRestaurante; contor++)
+                {
+                    if (txtCautare11.Text == restaurante[contor].denumire)
+                    {
+                        lblCautare11.Text = "An fondator: " + restaurante[contor].an_fondator.ToString();
+                        lblCautare11.ForeColor = Color.Green;
+                        lblCautare21.ForeColor = Color.Green;
+                        lblCautare21.Text = "Specific: " + restaurante[contor].specific.ToString();
+                        valid = 1;
+                    }
+                }
+                if (valid == 0)
+                {
+                    lblCautare11.Text = "Restaurant Negasit";
+                    lblCautare11.ForeColor = Color.Red;
+                    lblCautare21.Text = "";
+                }
+            }
+            else
+            {
+                lblCautare11.Text = "Caseta goala";
+                lblCautare11.ForeColor = Color.Red;
+                lblCautare21.Text = "";
+            }
         }
     }
 }
