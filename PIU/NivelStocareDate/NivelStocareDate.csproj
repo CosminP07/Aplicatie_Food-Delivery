@@ -41,10 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministrareClienti_Binar.cs" />
     <Compile Include="AdministrareClienti_Fisier.cs" />
     <Compile Include="AdministrareClienti_Memorie.cs" />
     <Compile Include="AdministrareRestaurante_Fisier.cs" />
     <Compile Include="AdministrareRestaurante_Memorie.cs" />
+    <Compile Include="AdministrareRestaurant_Binar.cs" />
+    <Compile Include="IStocareDataClienti.cs" />
+    <Compile Include="IStocareDataRestaurante.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

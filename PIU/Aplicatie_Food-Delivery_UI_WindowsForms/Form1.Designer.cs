@@ -32,6 +32,7 @@
             this.txtCautare = new System.Windows.Forms.TextBox();
             this.lblCautare1 = new System.Windows.Forms.Label();
             this.lblCautare2 = new System.Windows.Forms.Label();
+            this.btnInapoi = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Cautare
@@ -67,11 +68,23 @@
             this.lblCautare2.Size = new System.Drawing.Size(0, 16);
             this.lblCautare2.TabIndex = 3;
             // 
+            // btnInapoi
+            // 
+            this.btnInapoi.AutoSize = true;
+            this.btnInapoi.Location = new System.Drawing.Point(593, 500);
+            this.btnInapoi.Name = "btnInapoi";
+            this.btnInapoi.Size = new System.Drawing.Size(107, 26);
+            this.btnInapoi.TabIndex = 4;
+            this.btnInapoi.Text = "Inapoi la meniu";
+            this.btnInapoi.UseVisualStyleBackColor = true;
+            this.btnInapoi.Click += new System.EventHandler(this.metroButton1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(983, 558);
+            this.Controls.Add(this.btnInapoi);
             this.Controls.Add(this.lblCautare2);
             this.Controls.Add(this.lblCautare1);
             this.Controls.Add(this.txtCautare);
@@ -91,6 +104,7 @@
         private System.Windows.Forms.TextBox txtCautare;
         private System.Windows.Forms.Label lblCautare1;
         private System.Windows.Forms.Label lblCautare2;
+        private System.Windows.Forms.Button btnInapoi;
     }
 }
 

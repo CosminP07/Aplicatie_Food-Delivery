@@ -2,22 +2,19 @@
 using LibrarieModele.Enumerari;
 using NivelStocareDate;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace Aplicatie_Food_Delivery_UI_WindowsForms
 {
     public partial class Form2 : Form
     {
-        AdministrareRestaurante_Fisier adminRestaurante;
+        IStocareDataRestaurante adminRestaurante;
 
         private Label lblDenumire;
         private Label lblAn;
@@ -48,10 +45,10 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
             // setare locatie fisier in directorul corespunzator solutiei
             // astfel incat datele din fisier sa poata fi utilizate si de alte proiecte
             string caleCompletaFisier = locatieFisierSolutie + "\\" + numeFisier;
-            adminRestaurante = new AdministrareRestaurante_Fisier(caleCompletaFisier);
-            int nrRestaurante = 0;
+            adminRestaurante = StocareFactory.GetAdministratorStocare();
+            int nrRestaurante = adminRestaurante.GetId();
 
-            Restaurant[] restaurante = adminRestaurante.GetRestaurante(out nrRestaurante);
+            List<Restaurant> restaurante = adminRestaurante.GetRestaurante();
 
             //setare proprietati
             this.Size = new Size(1000, 400);
@@ -152,8 +149,8 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
 
         private void AfiseazaRestaurante()
         {
-            Restaurant[] restaurante = adminRestaurante.GetRestaurante(out int nrRestaurante);
-
+            List<Restaurant> restaurante = adminRestaurante.GetRestaurante();
+            int nrRestaurante = restaurante.Count;
             lblsDenumire = new Label[nrRestaurante];
             lblsAn = new Label[nrRestaurante];
             lblsSpecific = new Label[nrRestaurante];
@@ -198,8 +195,8 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
             {
 
                 int valid = 0;
-                Restaurant[] restaurante = adminRestaurante.GetRestaurante(out int nrRestaurante);
-                for (int contor = 0; contor < nrRestaurante; contor++)
+                List<Restaurant> restaurante = adminRestaurante.GetRestaurante();
+                for (int contor = 0; contor < restaurante.Count; contor++)
                 {
                     if (txtCautare11.Text == restaurante[contor].denumire)
                     {
@@ -223,6 +220,26 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
                 lblCautare11.ForeColor = Color.Red;
                 lblCautare21.Text = "";
             }
+        }
+
+
+        private void metroBtnInapoi_Click(object sender, EventArgs e)
+        {
+            FormMeniu frm = new FormMeniu();
+            frm.Show();
+            this.Hide();
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // Form2
+            // 
+            this.ClientSize = new System.Drawing.Size(876, 469);
+            this.Name = "Form2";
+            this.ResumeLayout(false);
+
         }
     }
 }

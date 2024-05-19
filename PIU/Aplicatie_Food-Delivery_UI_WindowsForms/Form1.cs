@@ -17,7 +17,7 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
 {
     public partial class Form1 : Form
     {
-        AdministrareClienti_Fisier adminClienti;
+        IStocareDataClienti adminClienti;
 
         private Label lblNume_Prenume;
         private Label lblVarsta;
@@ -48,10 +48,9 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
             // setare locatie fisier in directorul corespunzator solutiei
             // astfel incat datele din fisier sa poata fi utilizate si de alte proiecte
             string caleCompletaFisier = locatieFisierSolutie + "\\" + numeFisier;
-            adminClienti = new AdministrareClienti_Fisier(caleCompletaFisier);
-            int nrClienti1 = 0;
+            adminClienti = StocareFactory.GetAdministratorStocare2();
 
-            Client[] clienti = adminClienti.GetClienti(out nrClienti1);
+            List<Client> clienti = adminClienti.GetClienti();
 
             //setare proprietati
             this.Size = new Size(1000, 500);
@@ -152,11 +151,11 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
 
         private void AfiseazaClienti()
         {
-            Client[] clienti = adminClienti.GetClienti(out int nrClienti);
+            List<Client> clienti = adminClienti.GetClienti();
 
-            lblsNume_Prenume = new Label[nrClienti];
-            lblsVarsta = new Label[nrClienti];
-            lblsStatut = new Label[nrClienti];
+            lblsNume_Prenume = new Label[clienti.Count];
+            lblsVarsta = new Label[clienti.Count];
+            lblsStatut = new Label[clienti.Count];
 
             int i = 0;
             foreach (Client client in clienti)
@@ -194,7 +193,42 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
 
         private void OnCautaClicked(object sender, EventArgs e)
         {
+            if (txtCautare.Text != "")
+            {
 
+                int valid = 0;
+                List<Client> clienti = adminClienti.GetClienti();
+                for (int contor = 0; contor < clienti.Count; contor++)
+                {
+                    if (txtCautare.Text == clienti[contor].nume_prenume)
+                    {
+                        lblCautare1.Text = "Varsta: " + clienti[contor].varsta.ToString();
+                        lblCautare1.ForeColor = Color.Green;
+                        lblCautare2.ForeColor = Color.Green;
+                        lblCautare2.Text = "Statut: " + clienti[contor].statut.ToString();
+                        valid = 1;
+                    }
+                }
+                if (valid == 0)
+                {
+                    lblCautare1.Text = "Client Negasit";
+                    lblCautare1.ForeColor = Color.Red;
+                    lblCautare2.Text = "";
+                }
+            }
+            else
+            {
+                lblCautare1.Text = "Caseta goala";
+                lblCautare1.ForeColor = Color.Red;
+                lblCautare2.Text = "";
+            }
+         }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            FormMeniu frm = new FormMeniu();
+            frm.Show();
+            this.Hide();
         }
     }
 }

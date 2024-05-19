@@ -9,7 +9,7 @@ using LibrarieModele.Enumerari;
 
 namespace LibrarieModele
 {
-
+    [Serializable]
     public class Restaurant
     {
         public string denumire { get; set; }

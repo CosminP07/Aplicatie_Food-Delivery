@@ -26,8 +26,9 @@ namespace Aplicatie_Food_Delivery
             // setare locatie fisier in directorul corespunzator solutiei
             // astfel incat datele din fisier sa poata fi utilizate si de alte proiecte
             string caleCompletaFisier = locatieFisierSolutie + "\\" + numeFisier;
-            AdministrareClienti_Fisier adminClientif = new AdministrareClienti_Fisier(caleCompletaFisier);
-            int nrClienti1 = 0;
+            IStocareDataClienti adminClientif;
+            adminClientif = new AdministrareClienti_Fisier(caleCompletaFisier);
+
             
             Restaurant restaurantNou = new Restaurant();
             string numeFisierR = ConfigurationManager.AppSettings["NumeFisierR"];
@@ -35,8 +36,10 @@ namespace Aplicatie_Food_Delivery
             // setare locatie fisier in directorul corespunzator solutiei
             // astfel incat datele din fisier sa poata fi utilizate si de alte proiecte
             string caleCompletaFisier1 = locatieFisierSolutie1 + "\\" + numeFisierR;
-            AdministrareRestaurante_Fisier adminRestaurante = new AdministrareRestaurante_Fisier(caleCompletaFisier1);
-            int nrRestaurante1 = 0;
+            IStocareDataRestaurante adminRestaurante;
+            adminRestaurante = new AdministrareRestaurante_Fisier(caleCompletaFisier1);
+            //AdministrareRestaurante_Fisier adminRestaurante = new AdministrareRestaurante_Fisier(caleCompletaFisier1);
+
             string optiune;
             do
             {
@@ -76,8 +79,8 @@ namespace Aplicatie_Food_Delivery
                                     AfisareClienti(clienti, nrClienti1);
                                     break;*/
                                 case "AF":
-                                    Client[] clienti3 = adminClientif.GetClienti(out nrClienti1);
-                                    AfisareClienti(clienti3, nrClienti1);
+                                    List<Client> clienti3 = adminClientif.GetClienti();
+                                    AfisareClienti(clienti3);
                                     break;
                                 /*case "S":
                                     int idClient = nrClienti1 + 1;
@@ -87,22 +90,22 @@ namespace Aplicatie_Food_Delivery
                                     nrClienti1 += 1;
                                     break;*/
                                 case "SF":
-                                    int idClient1 = adminClientif.GetLastId();
+                                    int idClient1 = adminClientif.GetId();
                                     clientNou.Id_Client = ++idClient1;
                                     //adaugare client in fisier
                                     adminClientif.AddClient(clientNou);
                                     break;
                                 case "N":
-                                    Client[] clienti1 = adminClientif.GetClienti(out nrClienti1);
-                                    AdministrareClienti_Fisier.CautareClientNume(clienti1, nrClienti1);
+                                    List<Client> clienti1 = adminClientif.GetClienti();
+                                    adminClientif.CautareClientNume(clienti1);
                                     break;
                                 case "V":
-                                    Client[] clienti2 = adminClientif.GetClienti(out nrClienti1);
-                                    AdministrareClienti_Fisier.CautareClientVarsta(clienti2, nrClienti1);
+                                    List<Client> clienti2 = adminClientif.GetClienti();
+                                    adminClientif.CautareClientVarsta(clienti2);
                                     break;
                                 case "AA":
-                                    Client[] clienti4 = adminClientif.GetClienti(out nrClienti1);
-                                    AdministrareClienti_Fisier.ClientiAlfabet(clienti4, nrClienti1);
+                                    List<Client> clienti4 = adminClientif.GetClienti();
+                                    adminClientif.ClientiAlfabet(clienti4);
                                     break;
                                 case "X":
                                     break;
@@ -144,8 +147,8 @@ namespace Aplicatie_Food_Delivery
                                     AfisareRestaurant(restaurantNou);
                                     break;
                                 case "AF":
-                                    Restaurant[] restaurante3 = adminRestaurante.GetRestaurante(out nrRestaurante1);
-                                    AfisareRestaurante(restaurante3, nrRestaurante1);
+                                    List<Restaurant> restaurante3 = adminRestaurante.GetRestaurante();
+                                    AfisareRestaurante(restaurante3);
                                     break;
                                 /*case "A":
                                     Restaurant[] restaurante = adminRestaurante.GetRestaurante(out nrRestaurante1);
@@ -159,22 +162,22 @@ namespace Aplicatie_Food_Delivery
                                     nrRestaurante1 += 1;
                                     break;*/
                                 case "SF":
-                                    int idRestaurant1 = adminRestaurante.GetLastId();
+                                    int idRestaurant1 = adminRestaurante.GetId();
                                     restaurantNou.Id_Restaurant = ++idRestaurant1;
                                     //adaugare restaurant in fisier
                                     adminRestaurante.AddRestaurant(restaurantNou);
                                     break;
                                 case "N":
-                                    Restaurant[] restaurante1 = adminRestaurante.GetRestaurante(out nrRestaurante1);
-                                    AdministrareRestaurante_Fisier.CautareRestaurantNume(restaurante1, nrRestaurante1);
+                                    List<Restaurant> restaurante1 = adminRestaurante.GetRestaurante();
+                                    adminRestaurante.CautareRestaurantNume(restaurante1);
                                     break;
                                 case "F":
-                                    Restaurant[] restaurante2 = adminRestaurante.GetRestaurante(out nrRestaurante1);
-                                    AdministrareRestaurante_Fisier.CautareRestaurantAn(restaurante2, nrRestaurante1);
+                                    List<Restaurant> restaurante2 = adminRestaurante.GetRestaurante();
+                                    adminRestaurante.CautareRestaurantAn(restaurante2);
                                     break;
                                 case "AA":
-                                    Restaurant[] restaurante4 = adminRestaurante.GetRestaurante(out nrRestaurante1);
-                                    AdministrareRestaurante_Fisier.RestauranteAlfabet(restaurante4, nrRestaurante1);
+                                    List<Restaurant> restaurante4 = adminRestaurante.GetRestaurante();
+                                    adminRestaurante.RestauranteAlfabet(restaurante4);
                                     break;
                                 case "X":
                                     break;
@@ -284,19 +287,19 @@ namespace Aplicatie_Food_Delivery
 
             Console.WriteLine(infoClient);
         }
-        public static void AfisareRestaurante(Restaurant[] restaurante, int nrRestaurante)
+        public static void AfisareRestaurante(List<Restaurant> restaurante)
         {
             Console.WriteLine("\nRestaurantele sunt:");
-            for (int contor = 0; contor < nrRestaurante; contor++)
+            for (int contor = 0; contor < restaurante.Count; contor++)
             {
                 string infoRestaurant = restaurante[contor].Info();
                 Console.WriteLine(infoRestaurant);
             }
         }
-        public static void AfisareClienti(Client[] clienti, int nrClienti)
+        public static void AfisareClienti(List<Client> clienti)
         {
             Console.WriteLine("\nClientii sunt:");
-            for (int contor = 0; contor < nrClienti; contor++)
+            for (int contor = 0; contor < clienti.Count; contor++)
             {
                 string infoClient = clienti[contor].Info();
                 Console.WriteLine(infoClient);
