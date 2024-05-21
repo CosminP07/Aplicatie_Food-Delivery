@@ -1,5 +1,4 @@
-1;Pintilei Cosmin;21;Student
-2;Agrosoae Daniel;18;Elev
-3;Pintilei Robert;26;Angajat
-3;Cauca Viorica;65;Pensionar
-4;Filip Madalin;27;Somer
+3;Cauca Viorica;65;Angajat
+4;Avornicesei Andrei;26;Angajat
+5;Pintilei Cosmin;21;Student
+6;Davu Silviu;35;Angajat

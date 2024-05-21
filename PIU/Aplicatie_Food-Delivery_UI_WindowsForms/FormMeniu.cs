@@ -19,7 +19,7 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
         private void OnRestaurantClicked(object sender, EventArgs e)
         {
             this.Hide();
-            var formRestaurante = new Form2();
+            var formRestaurante = new FormRestaurante();
             formRestaurante.Closed += (s, args) => this.Close();
             formRestaurante.Show();
         }
@@ -27,13 +27,18 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
         private void OnClientiClicked(object sender, EventArgs e)
         {
             this.Hide();
-            var formClienti = new Form1();
+            var formClienti = new FormClienti();
             formClienti.Closed += (s, args) => this.Close();
             formClienti.Show();
         }
         private void OnFormClosed(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void lblWelcome_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

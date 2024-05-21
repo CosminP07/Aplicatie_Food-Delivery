@@ -1,4 +1,2 @@
-1;KFC;1950;FastFood
-2;Zimbru;2000;Traditional
-2;McDonalds;1965;FastFood
-3;KFC;1930;FastFood
+1;KFC;1960;FastFood
+3;Alabama;1980;Elegant

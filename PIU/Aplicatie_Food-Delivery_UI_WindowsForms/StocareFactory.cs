@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NivelStocareDate;
 using System.Configuration;
+using System.IO;
 
 namespace Aplicatie_Food_Delivery_UI_WindowsForms
 {
@@ -18,15 +19,17 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
         {
             var formatSalvare = ConfigurationManager.AppSettings[FORMAT_SALVARE];
             var numeFisier = ConfigurationManager.AppSettings[NUME_FISIER1];
+            string locatieFisierSolutie = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string caleCompletaFisier = locatieFisierSolutie + "\\" + numeFisier;
             if (formatSalvare != null)
             {
                 switch (formatSalvare)
                 {
                     default:
                     case "bin":
-                        return new AdministrareRestaurante_Binar(numeFisier + "." + formatSalvare);
+                        return new AdministrareRestaurante_Binar(caleCompletaFisier + "." + formatSalvare);
                     case "txt":
-                        return new AdministrareRestaurante_Fisier(numeFisier + "." + formatSalvare);
+                        return new AdministrareRestaurante_Fisier(caleCompletaFisier + "." + formatSalvare);
                 }
             }
 
@@ -36,15 +39,19 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
         {
             var formatSalvare = ConfigurationManager.AppSettings[FORMAT_SALVARE];
             var numeFisier = ConfigurationManager.AppSettings[NUME_FISIER2];
+
+            string locatieFisierSolutie = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string caleCompletaFisier = locatieFisierSolutie + "\\" + numeFisier;
+
             if (formatSalvare != null)
             {
                 switch (formatSalvare)
                 {
                     default:
-                    /*case "bin":
-                        return new AdministrareCititori_FisierBinar(numeFisier + "." + formatSalvare);*/
+                    case "bin":
+                        return new AdministrareClienti_Binar(caleCompletaFisier + "." + formatSalvare);
                     case "txt":
-                        return new AdministrareClienti_Fisier(numeFisier + "." + formatSalvare);
+                        return new AdministrareClienti_Fisier(caleCompletaFisier + "." + formatSalvare);
                 }
             }
 

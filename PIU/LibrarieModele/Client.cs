@@ -73,5 +73,9 @@ namespace LibrarieModele
                 return "Client nesetat!!!";
             return $"ID: {Id_Client} \nNume si prenume: {nume_prenume},\n Varsta: {varsta}\n Statut: {statut}";
         }
+        public override string ToString()
+        {
+            return Info();
+        }
     }
 }

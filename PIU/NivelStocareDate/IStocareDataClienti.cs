@@ -14,7 +14,7 @@ namespace NivelStocareDate
         int GetId();
         void CautareClientNume(List<Client> clienti);
         void CautareClientVarsta(List<Client> clienti);
-        void ClientiAlfabet(List<Client> clienti);
+        List<Client> ClientiAlfabet(List<Client> clienti);
         bool StergeClient(Client client);
         Client GetClientByIndex(int index);
     }

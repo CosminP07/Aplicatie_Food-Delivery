@@ -203,34 +203,11 @@ namespace NivelStocareDate
             if(valid == 0)
                 Console.WriteLine($"Clientul cu varsta de {varsta1} ani nu a fost gasit !!!");
         }
-        public void ClientiAlfabet(List<Client> clienti)
+        public List<Client> ClientiAlfabet(List<Client> clienti)
         {
-            string[][] sir = new string[26][];
-            int[] contor = new int[26];
-            int curent;
-
-
-            // citeste cate o linie si creaza un obiect de tip Client
-            // pe baza datelor din linia citita
-            for (curent = 0; curent < clienti.Count; curent++)
-            {
-                for (int i = 0; i < 26; i++)
-                {
-                    sir[i] = new string[clienti.Count];
-                    if (clienti[curent].nume_prenume[0] == (i + 65))
-                    {
-                        sir[i][contor[i]] = clienti[curent].nume_prenume;
-                        contor[i] += 1;
-                    }
-                }
-            }
-
-            for (int i = 0; i < 26; i++)
-            {
-                for (int j = 0; j < sir[i].Length; j++)
-                    Console.Write("{0} ", sir[i][j]);
-                Console.WriteLine();
-            }
+            List<Client> c = clienti;
+            c.Sort();
+            return c;
         }
         public int GetId()
         {

@@ -100,5 +100,9 @@ namespace LibrarieModele
                 return "Restaurant nesetat";
             return $"ID: {Id_Restaurant}\nDenumire: {denumire}\n An fondator: {an_fondator}\n Specific: {specific}";
         }
+        public override string ToString()
+        {
+            return Info();
+        }
     }
 }

@@ -209,7 +209,7 @@ namespace NivelStocareDate
         {
             throw new Exception("Optiunea de cautare dupa an in Binar nu este implementata!");
         }
-        public void ClientiAlfabet(List<Client> clienti)
+        public List<Client> ClientiAlfabet(List<Client> clienti)
         {
             throw new Exception("Optiunea de ordonare alfabetica in Binar nu este implementata!");
         }

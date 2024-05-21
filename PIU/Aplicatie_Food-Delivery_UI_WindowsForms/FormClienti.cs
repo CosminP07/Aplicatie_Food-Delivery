@@ -15,39 +15,26 @@ using System.Windows.Forms;
 
 namespace Aplicatie_Food_Delivery_UI_WindowsForms
 {
-    public partial class Form1 : Form
+    public partial class FormClienti : Form
     {
         IStocareDataClienti adminClienti;
 
-        private Label lblNume_Prenume;
-        private Label lblVarsta;
-        private Label lblStatut;
-
-        private Label lblAdaugaNume_Prenume;
-        private Label lblAdaugaVarsta;
-        private Label lblAdaugaStatut;
+     
 
         private Label[] lblsNume_Prenume;
         private Label[] lblsVarsta;
         private Label[] lblsStatut;
 
-        private Button btnAdauga;
 
         private TextBox txtNume_Prenume;
         private TextBox txtVarsta;
-        private TextBox txtStatut;
 
         private const int LATIME_CONTROL = 100;
         private const int DIMENSIUNE_PAS_Y = 30;
         private const int DIMENSIUNE_PAS_X = 120;
-        public Form1()
+        public FormClienti()
         {
             InitializeComponent();
-            string numeFisier = ConfigurationManager.AppSettings["NumeFisier"];
-            string locatieFisierSolutie = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-            // setare locatie fisier in directorul corespunzator solutiei
-            // astfel incat datele din fisier sa poata fi utilizate si de alte proiecte
-            string caleCompletaFisier = locatieFisierSolutie + "\\" + numeFisier;
             adminClienti = StocareFactory.GetAdministratorStocare2();
 
             List<Client> clienti = adminClienti.GetClienti();
@@ -58,95 +45,69 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
             //this.Location = new Point(240, 190);
             this.Font = new Font("Raleway", 12, FontStyle.Bold);
             this.ForeColor = Color.DarkCyan;
-            this.BackColor = Color.Yellow;
+            this.BackColor = Color.Cyan;
             this.Text = "Informatii clienti";
 
-            //adaugare control de tip Label pentru 'Nume si prenume';
-            lblNume_Prenume = new Label();
-            lblNume_Prenume.Width = LATIME_CONTROL*2;
-            lblNume_Prenume.Text = "Nume si prenume";
-            lblNume_Prenume.Left = 0;
-            lblNume_Prenume.ForeColor = Color.DarkMagenta;
-            this.Controls.Add(lblNume_Prenume);
-
-            //adaugare control de tip Label pentru "Varsta";
-            lblVarsta = new Label();
-            lblVarsta.Width = LATIME_CONTROL;
-            lblVarsta.Text = "Varsta";
-            lblVarsta.Left = 2 * DIMENSIUNE_PAS_X;
-            lblVarsta.ForeColor = Color.DarkMagenta;
-            this.Controls.Add(lblVarsta);
-
-            //adaugare control de tip Label pentru 'Note';
-            lblStatut = new Label();
-            lblStatut.Width = LATIME_CONTROL;
-            lblStatut.Text = "Statut";
-            lblStatut.Left = 3 * DIMENSIUNE_PAS_X;
-            lblStatut.ForeColor = Color.DarkMagenta;
-            this.Controls.Add(lblStatut);
-
-            lblAdaugaNume_Prenume = new Label();
-            lblAdaugaNume_Prenume.Width= LATIME_CONTROL*2;
-            lblAdaugaNume_Prenume.Text = "Nume si prenume:";
-            lblAdaugaNume_Prenume.Left = 4 * DIMENSIUNE_PAS_X;
-            lblAdaugaNume_Prenume.ForeColor = Color.DarkMagenta;
-            this.Controls.Add (lblAdaugaNume_Prenume);
-
-            txtNume_Prenume = new TextBox();
-            txtNume_Prenume.Width = LATIME_CONTROL * 2;
-            txtNume_Prenume.Left = 4 * DIMENSIUNE_PAS_X;
-            txtNume_Prenume.Top = DIMENSIUNE_PAS_Y;
-            this.Controls.Add(txtNume_Prenume);
-
-            lblAdaugaVarsta = new Label();
-            lblAdaugaVarsta.Width = LATIME_CONTROL;
-            lblAdaugaVarsta.Text = "Varsta:";
-            lblAdaugaVarsta.Left = 4 * DIMENSIUNE_PAS_X;
-            lblAdaugaVarsta.Top = 2* DIMENSIUNE_PAS_Y;
-            lblAdaugaVarsta.ForeColor = Color.DarkMagenta;
-            this.Controls.Add(lblAdaugaVarsta);
-
-            txtVarsta = new TextBox();
-            txtVarsta.Width = LATIME_CONTROL;
-            txtVarsta.Left = 4 * DIMENSIUNE_PAS_X;
-            txtVarsta.Top = 3 * DIMENSIUNE_PAS_Y;
-            this.Controls.Add(txtVarsta);
-
-            lblAdaugaStatut = new Label();
-            lblAdaugaStatut.Width = LATIME_CONTROL;
-            lblAdaugaStatut.Text = "Statut:";
-            lblAdaugaStatut.Left = 4 * DIMENSIUNE_PAS_X;
-            lblAdaugaStatut.Top = 4 * DIMENSIUNE_PAS_Y;
-            lblAdaugaStatut.ForeColor = Color.DarkMagenta;
-            this.Controls.Add(lblAdaugaStatut);
-
-            txtStatut = new TextBox();
-            txtStatut.Width = LATIME_CONTROL;
-            txtStatut.Left = 4 * DIMENSIUNE_PAS_X;
-            txtStatut.Top = 5 * DIMENSIUNE_PAS_Y;
-            this.Controls.Add(txtStatut);
-
-            btnAdauga = new Button();
-           // btnAdauga.Width = LATIME_CONTROL;
-            btnAdauga.Location = new System.Drawing.Point(4 * DIMENSIUNE_PAS_X, 6 * DIMENSIUNE_PAS_Y);
-            btnAdauga.Text = "Adauga";
-            btnAdauga.BackColor = Color.White;
-            btnAdauga.AutoSize = true;
-            // "Click" este un *event* in clasa Button
-            // si poate avea atasat unul sau mai multe handlere de eveniment (adrese de functii)
-            // Acesta este motivul utilizarii operatorului +=
-            btnAdauga.Click += OnButtonClicked;
-            this.Controls.Add(btnAdauga);
 
             this.FormClosed += OnFormClosed;
         }
-        private void OnButtonClicked(object sender, EventArgs e)
-        {
 
+        public void AfiseazaGrid(List<Client> clienti)
+        {
+            dataGridViewClienti.DataSource = null;
+            //dataGridViewClienti.DataSource = clienti;
+            dataGridViewClienti.DataSource = clienti.Select(s => new {
+                s.Id_Client,
+                s.nume_prenume,
+                s.varsta,
+                s.statut,
+                } ).ToList();
+        }
+
+        private void AfisareClientiInControlListbox(List<Client> clienti)
+        {
+            lstClienti.Items.Clear();
+            foreach (Client client in clienti)
+            {
+                //pentru a adauga un obiect de tip Student in colectia de Items a unui control de tip ListBox, 
+                // clasa Student trebuie sa implementeze metoda ToString() specificand cuvantul cheie 'override' in definitie
+                //pentru a arata ca metoda ToString a clasei de baza (Object) este suprascrisa
+                lstClienti.Items.Add(client);
+
+                //personalizare sursa de date
+                //lstAfisare.Items.Add(client.NumeComplet);
+            }
+        }
+
+        private void mtResetLista_Click(object sender, EventArgs e)
+        {
+            List<Client> clienti = adminClienti.GetClienti();
+            AfiseazaGrid(clienti);
+            AfisareClientiInControlListbox (clienti);
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            AfiseazaClienti();
+            //AfiseazaClienti();
+            AfisareClientiInControlListbox(adminClienti.GetClienti());
+            dataGridViewClienti.DataSource = null;
+            AfiseazaGrid(adminClienti.GetClienti());
+        }
+
+        private bool DateIntrareValide()
+        {
+            string nume = txtNume_Prenume.Text;
+            int varsta = Int32.Parse(txtVarsta.Text);
+
+            Client clientCuAcelasiNume = adminClienti.GetClient(nume, varsta);
+
+            return clientCuAcelasiNume == null;
+        }
+
+        private void ResetareControale()
+        {
+            txtNume_Prenume.Text = txtVarsta.Text = string.Empty;
+
+            
         }
 
         private void AfiseazaClienti()
@@ -193,7 +154,7 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
 
         private void OnCautaClicked(object sender, EventArgs e)
         {
-            if (txtCautare.Text != "")
+            /*if (txtCautare.Text != "")
             {
 
                 int valid = 0;
@@ -221,7 +182,7 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
                 lblCautare1.Text = "Caseta goala";
                 lblCautare1.ForeColor = Color.Red;
                 lblCautare2.Text = "";
-            }
+            }*/
          }
 
         private void metroButton1_Click(object sender, EventArgs e)
@@ -229,6 +190,54 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
             FormMeniu frm = new FormMeniu();
             frm.Show();
             this.Hide();
+        }
+        private void btnAdaugaClient_Click(object sender, EventArgs e)
+        {
+            FormAdaugaClient frmAdauga = new FormAdaugaClient();
+            frmAdauga.ShowDialog();
+        }
+
+        private void btnSorteazaClicked(object sender, EventArgs e)
+        {
+            /*List<Client> c1 = adminClienti.ClientiAlfabet(adminClienti.GetClienti());
+            dataGridViewClienti.DataSource = c1;
+            AfiseazaGrid(c1);
+            dataGridViewClienti.Sort(dataGridViewClienti.Columns[1], ListSortDirection.Ascending);
+            lstClienti.Sorted = true;
+            AfisareClientiInControlListbox(adminClienti.GetClienti());*/
+            List<Client> clienti = adminClienti.GetClienti();
+
+            // Sortează lista de clienți în ordine alfabetică după nume_prenume
+            clienti = clienti.OrderBy(c => c.nume_prenume).ToList();
+
+            // Actualizează sursa de date pentru dataGridViewClienti
+            AfiseazaGrid(clienti);
+
+            // Actualizează listbox-ul
+            AfisareClientiInControlListbox(clienti);
+        }
+
+        private void StergeSelectedClicked(object sender, EventArgs e)
+        {
+            adminClienti.StergeClient(adminClienti.GetClient(adminClienti.GetClienti()[lstClienti.SelectedIndex].Id_Client));
+            AfisareClientiInControlListbox(adminClienti.GetClienti());
+            //AfiseazaGrid(adminClienti.GetClienti());
+        }
+
+        private void btnModificaClicked(object sender, EventArgs e)
+        {
+            if(lstClienti.SelectedItem == null)
+            {
+                return;
+            }
+            FormModificaClient frm = new FormModificaClient(adminClienti.GetClient(adminClienti.GetClienti()[lstClienti.SelectedIndex].Id_Client));
+            frm.ShowDialog();
+        }
+
+        private void btnCautaClicked(object sender, EventArgs e)
+        {
+            FormCautaClient frm = new FormCautaClient();
+            frm.ShowDialog();
         }
     }
 }
