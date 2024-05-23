@@ -15,6 +15,9 @@ namespace LibrarieModele
         private const int NUME = 1;
         private const int VARSTA = 2;
         private const int STATUT = 3;
+
+        private const int varsta_invalida = 0;
+        private const int major = 18;
         public string nume_prenume { set; get; }
         public int varsta { get; set; }
         public int Id_Client { get; set; }
@@ -50,9 +53,9 @@ namespace LibrarieModele
         }
         public string Major()
         {
-            if (varsta == 0)
+            if (varsta == varsta_invalida)
                 return "Varsta clientului nu a fost setata!!!";
-            if (varsta < 18)
+            if (varsta < major)
                 return "Clientul este major!";
             return "Clientul nu este major!";
         }

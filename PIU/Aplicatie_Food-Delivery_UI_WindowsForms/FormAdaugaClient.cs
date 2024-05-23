@@ -30,11 +30,7 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
         {
             bool valid = true;
             string nume = txtNume.Text;
-            
-            
-            int varsta = Convert.ToInt32(txtVarsta.Text);
-            
-
+        
             if (txtNume.Text == string.Empty)
             {
                 lblEroareNume.Text = "Introduceti un nume si prenume!!!";
@@ -53,7 +49,9 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
                 lblEroareStatut.ForeColor = Color.Red;
                 valid = false;
             }
-            
+            if (valid)
+            {
+                int varsta = Convert.ToInt32(txtVarsta.Text);
                 Client clientCuAcelasiNume = adminClienti.GetClient(nume, varsta);
                 if (clientCuAcelasiNume != null)
                 {
@@ -61,7 +59,7 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
                     lblEroareExistent.Text = "Clientul exista deja!!!";
                     lblEroareExistent.ForeColor = Color.Red;
                 }
-            
+            }
             return valid;
         }
         private void OnAdaugaClicked(object sender, EventArgs e)
@@ -74,7 +72,7 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
             Client c = new Client(txtNume.Text, Convert.ToInt32(txtVarsta.Text));
             c.statut = GetProgramStudiuSelectat();
             adminClienti.AddClient(c);
-            lblEroareExistent.Text = "Studentul a fost adaugat cu succes!!!";
+            lblEroareExistent.Text = "Clientul a fost adaugat cu succes!!!";
             lblEroareExistent.ForeColor = Color.Green;
             ResetareControale();
 

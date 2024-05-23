@@ -34,7 +34,7 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
         {
             if (adminClienti.GetClient(cmbNume.Text, Convert.ToInt32(cmbVarsta.Text)) == null)
             {
-                lblCauta.Text = "STUDENT INEXISTENT";
+                lblCauta.Text = "CLIENT INEXISTENT";
                 lblCauta.ForeColor = Color.Red;
                 this.Controls.Add(lblCauta);
                 rdbAngajat.Hide();

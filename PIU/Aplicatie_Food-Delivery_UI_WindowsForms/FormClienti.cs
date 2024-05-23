@@ -26,8 +26,6 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
         private Label[] lblsStatut;
 
 
-        private TextBox txtNume_Prenume;
-        private TextBox txtVarsta;
 
         private const int LATIME_CONTROL = 100;
         private const int DIMENSIUNE_PAS_Y = 30;
@@ -46,7 +44,7 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
             this.Font = new Font("Raleway", 12, FontStyle.Bold);
             this.ForeColor = Color.DarkCyan;
             this.BackColor = Color.Cyan;
-            this.Text = "Informatii clienti";
+            this.Text = "Informații clienți";
 
 
             this.FormClosed += OnFormClosed;
@@ -69,13 +67,9 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
             lstClienti.Items.Clear();
             foreach (Client client in clienti)
             {
-                //pentru a adauga un obiect de tip Student in colectia de Items a unui control de tip ListBox, 
-                // clasa Student trebuie sa implementeze metoda ToString() specificand cuvantul cheie 'override' in definitie
-                //pentru a arata ca metoda ToString a clasei de baza (Object) este suprascrisa
+                
                 lstClienti.Items.Add(client);
 
-                //personalizare sursa de date
-                //lstAfisare.Items.Add(client.NumeComplet);
             }
         }
 
@@ -92,24 +86,6 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
             dataGridViewClienti.DataSource = null;
             AfiseazaGrid(adminClienti.GetClienti());
         }
-
-        private bool DateIntrareValide()
-        {
-            string nume = txtNume_Prenume.Text;
-            int varsta = Int32.Parse(txtVarsta.Text);
-
-            Client clientCuAcelasiNume = adminClienti.GetClient(nume, varsta);
-
-            return clientCuAcelasiNume == null;
-        }
-
-        private void ResetareControale()
-        {
-            txtNume_Prenume.Text = txtVarsta.Text = string.Empty;
-
-            
-        }
-
         private void AfiseazaClienti()
         {
             List<Client> clienti = adminClienti.GetClienti();
@@ -152,39 +128,6 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
             Application.Exit();
         }
 
-        private void OnCautaClicked(object sender, EventArgs e)
-        {
-            /*if (txtCautare.Text != "")
-            {
-
-                int valid = 0;
-                List<Client> clienti = adminClienti.GetClienti();
-                for (int contor = 0; contor < clienti.Count; contor++)
-                {
-                    if (txtCautare.Text == clienti[contor].nume_prenume)
-                    {
-                        lblCautare1.Text = "Varsta: " + clienti[contor].varsta.ToString();
-                        lblCautare1.ForeColor = Color.Green;
-                        lblCautare2.ForeColor = Color.Green;
-                        lblCautare2.Text = "Statut: " + clienti[contor].statut.ToString();
-                        valid = 1;
-                    }
-                }
-                if (valid == 0)
-                {
-                    lblCautare1.Text = "Client Negasit";
-                    lblCautare1.ForeColor = Color.Red;
-                    lblCautare2.Text = "";
-                }
-            }
-            else
-            {
-                lblCautare1.Text = "Caseta goala";
-                lblCautare1.ForeColor = Color.Red;
-                lblCautare2.Text = "";
-            }*/
-         }
-
         private void metroButton1_Click(object sender, EventArgs e)
         {
             FormMeniu frm = new FormMeniu();
@@ -199,12 +142,7 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
 
         private void btnSorteazaClicked(object sender, EventArgs e)
         {
-            /*List<Client> c1 = adminClienti.ClientiAlfabet(adminClienti.GetClienti());
-            dataGridViewClienti.DataSource = c1;
-            AfiseazaGrid(c1);
-            dataGridViewClienti.Sort(dataGridViewClienti.Columns[1], ListSortDirection.Ascending);
-            lstClienti.Sorted = true;
-            AfisareClientiInControlListbox(adminClienti.GetClienti());*/
+            
             List<Client> clienti = adminClienti.GetClienti();
 
             // Sortează lista de clienți în ordine alfabetică după nume_prenume

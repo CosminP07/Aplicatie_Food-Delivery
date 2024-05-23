@@ -37,29 +37,31 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
 
             if (txtDenumire.Text == string.Empty)
             {
-                lblEroareNume.Text = "Introduceti un nume si prenume!!!";
+                lblEroareNume.Text = "Introduceti o denumire!!!";
                 lblEroareNume.ForeColor = Color.Red;
                 valid = false;
             }
             if (txtAn.Text == string.Empty)
             {
-                lblEroareVarsta.Text = "Introduceti o varsta!!!";
+                lblEroareVarsta.Text = "Introduceti un an fondator!!!";
                 lblEroareVarsta.ForeColor = Color.Red;
                 valid = false;
             }
             if (rdbFastFood.Checked == false && rdbTraditional.Checked == false && rdbIndian.Checked == false && rdbChinezesc.Checked == false && rdbElegant.Checked == false)
             {
-                lblEroareStatut.Text = "Alegeti un statut!!!";
+                lblEroareStatut.Text = "Alegeti un specific!!!";
                 lblEroareStatut.ForeColor = Color.Red;
                 valid = false;
             }
-
-            Restaurant restaurantCuAcelasiNume = adminRestaurante.GetRestaurant(denumire, an);
-            if (restaurantCuAcelasiNume != null)
+            if (valid)
             {
-                valid = false;
-                lblEroareExistent.Text = "Restaurantul exista deja!!!";
-                lblEroareExistent.ForeColor = Color.Red;
+                Restaurant restaurantCuAcelasiNume = adminRestaurante.GetRestaurant(denumire, an);
+                if (restaurantCuAcelasiNume != null)
+                {
+                    valid = false;
+                    lblEroareExistent.Text = "Restaurantul exista deja!!!";
+                    lblEroareExistent.ForeColor = Color.Red;
+                }
             }
 
             return valid;
