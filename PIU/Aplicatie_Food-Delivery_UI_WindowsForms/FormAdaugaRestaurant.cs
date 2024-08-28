@@ -53,6 +53,13 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
                 lblEroareStatut.ForeColor = Color.Red;
                 valid = false;
             }
+            Int32.TryParse(txtAn.Text, out int result);
+            if (result == 0 || (!(result>=1900 && result <=2024)))
+            {
+                lblEroareVarsta.Text = "An INVALID";
+                lblEroareVarsta.ForeColor = Color.Red;
+                valid = false;
+            }
             if (valid)
             {
                 Restaurant restaurantCuAcelasiNume = adminRestaurante.GetRestaurant(denumire, an);

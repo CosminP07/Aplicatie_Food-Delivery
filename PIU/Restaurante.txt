@@ -1,2 +1,3 @@
 1;KFC;1960;FastFood
 3;Alabama;1980;Elegant
+4;MCDonalds;1950;FastFood

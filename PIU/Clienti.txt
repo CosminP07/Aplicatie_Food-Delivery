@@ -1,4 +1,4 @@
 3;Cauca Viorica;65;Angajat
-4;Avornicesei Andrei;26;Angajat
-5;Pintilei Cosmin;21;Student
+4;Avornicesei Andrei;40;Somer
 6;Davu Silviu;35;Angajat
+7;Popescu Ion;24;Angajat

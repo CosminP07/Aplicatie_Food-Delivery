@@ -49,6 +49,12 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
                 lblEroareStatut.ForeColor = Color.Red;
                 valid = false;
             }
+            Int32.TryParse(txtVarsta.Text,out int result);
+            if (result == 0 || (!(result >= 14 && result <= 100))) {
+                lblEroareVarsta.Text = "Varsta INVALIDA";
+                lblEroareVarsta.ForeColor = Color.Red;
+                valid = false;
+            }
             if (valid)
             {
                 int varsta = Convert.ToInt32(txtVarsta.Text);

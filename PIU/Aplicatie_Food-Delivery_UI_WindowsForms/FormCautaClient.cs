@@ -97,7 +97,6 @@ namespace Aplicatie_Food_Delivery_UI_WindowsForms
         }
         private void FormCautaClient_Load(object sender, EventArgs e)
         {
-
         }
     }
 }
